@@ -4,20 +4,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 public class Chess extends JPanel implements MouseListener {
-
+	Image background;
+	
 	/** constructors **/
 	public Chess() {
+		this.background = new ImageIcon("Image/chessboard.jpg").getImage();
 		initGame();
 		addMouseListener(this);
 		this.setMinimumSize(new Dimension(641, 641));
-		
 	}
 	
 	private void initGame() {
@@ -35,30 +37,13 @@ public class Chess extends JPanel implements MouseListener {
 	// repaints the widget when an update of any kind is made
 	public void paintComponent(Graphics g) {
 			Graphics2D g2d = (Graphics2D)g;
-			drawGrid(g2d);
 			drawPieces(g2d);
+			g.drawImage(this.background, 0, 0, null);
 		}
 	
 	private void drawPieces(Graphics2D g2d) {
 			// TODO Auto-generated method stub
 			
-		}
-
-	private void drawGrid(Graphics2D g2d) {
-		g2d.setColor(Color.BLACK);
-		int x = 0;
-		int y = 0;
-		while (x <= 640)
-		{
-			g2d.drawLine(x, y, x, y + 640);
-			x = x + 80;
-		}
-		x = 0;
-		while (y <= 640)
-		{
-			g2d.drawLine(x, y, x + 640, y);
-			y = y + 80;
-		}
 		}
 
 	@Override
@@ -80,9 +65,13 @@ public class Chess extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mousePressed(MouseEvent event) {
+		//System.out.print("CLIC:(" + event.getX() + ";" + event.getY() + ")");
+		if (event.getButton() == MouseEvent.BUTTON1 && (event.getX() - 48) > 0 && (event.getX() < (44 + 675)) && (event.getY() - 47) > 0 && event.getY() < (682 + 44)) {		// if left button is pressed and the clic is in the board limits
+		this.oldx = (event.getX() - 48) / (675 / 8);		// get the X on the board 48
+		this.oldy = (event.getY() - 47)/ (682 / 8);		// get the Y on the game board 47
+		System.out.print("\nCLIC:(" + oldx + ";" + oldy + ")");
+		}
 	}
 
 	@Override
@@ -93,5 +82,6 @@ public class Chess extends JPanel implements MouseListener {
 	
 	/** private fields **/
 	piece board[][];
+	int oldx, oldy;		// denotes where the player clicked when he pressed the mouse button
 
 }

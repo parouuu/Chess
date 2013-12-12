@@ -20,16 +20,16 @@ public class Game extends JFrame {
 	/** constructors **/
 	public Game() {
 		setTitle("Chess");
-		setSize(680, 730);
+		setSize(810, 821);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		mainPanel = new JPanel();
 		widget = new Chess();
 		chat = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
 		mainPanel.add(widget);
 		JScrollPane scrollPane = new JScrollPane(chat);
-		scrollPane.setMaximumSize(new Dimension(50, scrollPane.WIDTH));
+		scrollPane.setMaximumSize(new Dimension(75, 75));
 		mainPanel.add(scrollPane);
 		
 		getContentPane().add(mainPanel);
