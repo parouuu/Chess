@@ -34,10 +34,15 @@ public class referee {
 			{
 				ArrayList<pos> tmp = possiblePos.get(i);
 				int j = 0;
+				System.out.print("test piiiiion : " + tmp.get(j).getX() + ":"+ tmp.get(j).getY() +"\n");
 				if (tmp.get(j).getX() != toMove.getPos().getX() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] != null && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()].getPlayer() != toMove.getPlayer())
-					posAfterCutView.add(tmp.get(j).clone());
+					{
+					System.out.print("test pion : " + tmp.get(j).getX() + ":"+ tmp.get(j).getY() +"\n");
+						posAfterCutView.add(tmp.get(j).clone());
+					}
 				else if (tmp.get(j).getX() == toMove.getPos().getX())
 				{
+					System.out.print("test pion 2: " + tmp.get(j).getX() + ":"+ tmp.get(j).getY() +"\n");
 					while (j < tmp.size() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] == null)
 					{
 						posAfterCutView.add(tmp.get(j).clone());
@@ -46,7 +51,7 @@ public class referee {
 				}
 			}
 		}
-		if (toMove.getName() == "knight")
+		else if (toMove.getName() == "knight")
 		{
 			for (int i = 0; i < possiblePos.size(); i++)
 			{
@@ -67,6 +72,7 @@ public class referee {
 				while (j < tmp.size() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] == null)
 				{
 					posAfterCutView.add(tmp.get(j).clone());
+					System.out.print("test : " + tmp.get(j).getX() + ":"+ tmp.get(j).getY() +"\n");
 					j++;
 				}
 				if (j < tmp.size() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()].getPlayer() !=  toMove.getPlayer())

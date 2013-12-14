@@ -24,5 +24,4 @@ public class pos {
 	{
 		return (new pos(x, y));
 	}
-
 }
