@@ -48,20 +48,33 @@ public class piece {
 	}
 
 	private ArrayList<ArrayList<pos>> checkKing() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
+		for (int i = -1; i <= 1; i++)
+		{
+			ArrayList<pos> tmpDir = new ArrayList<pos>();
+			for (int j = -1; j <= 1; j++)
+			{
+				if (checkBoard(new pos(position.getX()+i, position.getY()+j)))
+					tmpDir.add(new pos(position.getX()+i, position.getY()+j));
+			}
+			tmp.add(tmpDir);
+		}
+		return (tmp);
 	}
 
 	private ArrayList<ArrayList<pos>> checkQueen() {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		for (int i = -1; i <= 1; i++)
 		{
-			ArrayList<pos> tmpDir = new ArrayList<pos>();
-			for (int j = -1; checkBoard(new pos(position.getX()-1, position.getY()+j)); j++)
+			for (int j = -1; j <= 1; j++)
 			{
-				tmpDir.add(new pos(position.getX()-1, position.getY()));
+				ArrayList<pos> tmpDir = new ArrayList<pos>();
+				for (int k=i, l = j; checkBoard(new pos(position.getX()+k, position.getY()+l));k = k + i, l = l + j)
+				{
+					tmpDir.add(new pos(position.getX()+k, position.getY()+l));
+				}
+				tmp.add(tmpDir);
 			}
-			tmp.add(tmpDir);
 		}
 		return (tmp);
 	}
