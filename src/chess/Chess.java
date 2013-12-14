@@ -63,13 +63,13 @@ public class Chess extends JPanel implements MouseListener {
 		board[6][7] = new piece(new pos(6,7), "knight", true, new ImageIcon("Image/WhiteHorse.png").getImage());
 		board[7][7] = new piece(new pos(7,7), "rook", true, new ImageIcon("Image/WhiteTower.png").getImage());
 		board[0][6] = new piece(new pos(0,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
-		/*board[0][5] = new piece(new pos(0,5), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
-		board[6][2] = new piece(new pos(2,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
-		board[6][3] = new piece(new pos(3,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
-		board[6][4] = new piece(new pos(4,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
-		board[6][5] = new piece(new pos(5,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
+		board[1][6] = new piece(new pos(0,5), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
+		board[2][6] = new piece(new pos(2,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
+		board[3][6] = new piece(new pos(3,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
+		board[4][6] = new piece(new pos(4,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
+		board[5][6] = new piece(new pos(5,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
 		board[6][6] = new piece(new pos(6,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
-		board[6][7] = new piece(new pos(7,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());*/
+		board[7][6] = new piece(new pos(7,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
 	}
 	
 	// repaints the widget when an update of any kind is made
@@ -146,15 +146,16 @@ public class Chess extends JPanel implements MouseListener {
 			else if (!clic && isPosInArray(new pos(x, y))) {
 				board[x][y] = board[oldx][oldy];
 				board[oldx][oldy] = null;
-				board[x][y].setPos(new pos(x, y));
+				board[x][y].move(new pos(x, y));
 				clic = !clic;
+				player = !player;
 				}
 			}
-		if (!clic && event.getButton() == MouseEvent.BUTTON2) {
+		if (!clic && event.getButton() == MouseEvent.BUTTON3) {
 			clic = !clic;
 			System.out.print("\nOUI");
-			System.out.print(MouseEvent.BUTTON2);
-		}
+			System.out.print(MouseEvent.BUTTON3);
+			}
 		repaint();
 	}
 

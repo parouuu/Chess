@@ -39,10 +39,6 @@ public class piece {
 		return (position.clone());
 	}
 	
-	public void setPos(pos p) {
-		position = p.clone();
-	}
-	
 	public void 	move(pos newPos)
 	{
 		position = newPos.clone();
