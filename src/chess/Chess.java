@@ -19,6 +19,7 @@ public class Chess extends JPanel implements MouseListener {
 		initGame();
 		addMouseListener(this);
 		this.setMinimumSize(new Dimension(641, 641));
+		ref = new referee();
 	}
 	
 	private void initGame() {
@@ -34,14 +35,14 @@ public class Chess extends JPanel implements MouseListener {
 	}
 
 	private void setPieces() {
-		board[0][0] = new piece(new pos(0,0), "tower", true, new ImageIcon("Image/BlackTower.png").getImage());
-		board[0][1] = new piece(new pos(0,1), "cheval", true, new ImageIcon("Image/BlackHorse.png").getImage());
+		board[0][0] = new piece(new pos(0,0), "rook", true, new ImageIcon("Image/BlackTower.png").getImage());
+		board[0][1] = new piece(new pos(0,1), "knight", true, new ImageIcon("Image/BlackHorse.png").getImage());
 		board[0][2] = new piece(new pos(0,2), "bishop", true, new ImageIcon("Image/BlackBishop.png").getImage());
 		board[0][3] = new piece(new pos(0,3), "king", true, new ImageIcon("Image/BlackKing.png").getImage());
 		board[0][4] = new piece(new pos(0,4), "queen", true, new ImageIcon("Image/BlackQueen.png").getImage());
 		board[0][5] = new piece(new pos(0,5), "bishop", true, new ImageIcon("Image/BlackBishop.png").getImage());
-		board[0][6] = new piece(new pos(0,6), "cheval", true, new ImageIcon("Image/BlackHorse.png").getImage());
-		board[0][7] = new piece(new pos(0,7), "tower", true, new ImageIcon("Image/BlackTower.png").getImage());
+		board[0][6] = new piece(new pos(0,6), "knight", true, new ImageIcon("Image/BlackHorse.png").getImage());
+		board[0][7] = new piece(new pos(0,7), "rook", true, new ImageIcon("Image/BlackTower.png").getImage());
 		board[1][0] = new piece(new pos(1,0), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
 		board[1][1] = new piece(new pos(1,1), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
 		board[1][2] = new piece(new pos(1,2), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
@@ -50,14 +51,14 @@ public class Chess extends JPanel implements MouseListener {
 		board[1][5] = new piece(new pos(1,5), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
 		board[1][6] = new piece(new pos(1,6), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
 		board[1][7] = new piece(new pos(1,7), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
-		board[7][0] = new piece(new pos(7,0), "tower", true, new ImageIcon("Image/WhiteTower.png").getImage());
-		board[7][1] = new piece(new pos(7,1), "cheval", true, new ImageIcon("Image/WhiteHorse.png").getImage());
+		board[7][0] = new piece(new pos(7,0), "rook", true, new ImageIcon("Image/WhiteTower.png").getImage());
+		board[7][1] = new piece(new pos(7,1), "knight", true, new ImageIcon("Image/WhiteHorse.png").getImage());
 		board[7][2] = new piece(new pos(7,2), "bishop", true, new ImageIcon("Image/WhiteBishop.png").getImage());
 		board[7][3] = new piece(new pos(7,3), "Queen", true, new ImageIcon("Image/WhiteQueen.png").getImage());
 		board[7][4] = new piece(new pos(7,4), "king", true, new ImageIcon("Image/WhiteKing.png").getImage());
 		board[7][5] = new piece(new pos(7,5), "bishop", true, new ImageIcon("Image/WhiteBishop.png").getImage());
-		board[7][6] = new piece(new pos(7,6), "cheval", true, new ImageIcon("Image/WhiteHorse.png").getImage());
-		board[7][7] = new piece(new pos(7,7), "tower", true, new ImageIcon("Image/WhiteTower.png").getImage());
+		board[7][6] = new piece(new pos(7,6), "knight", true, new ImageIcon("Image/WhiteHorse.png").getImage());
+		board[7][7] = new piece(new pos(7,7), "rook", true, new ImageIcon("Image/WhiteTower.png").getImage());
 		board[6][0] = new piece(new pos(6,0), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
 		board[6][1] = new piece(new pos(6,1), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
 		board[6][2] = new piece(new pos(6,2), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());

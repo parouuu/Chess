@@ -53,13 +53,13 @@ public class piece {
 	
 	public ArrayList<ArrayList<pos>>	checkMove()
 	{
-		if (name == "pawns")
+		if (name == "pawn")
 			return (checkPawns());
-		else if (name == "rooks")
+		else if (name == "rook")
 			return (checkRocks());
-		else if (name == "knights")
+		else if (name == "knight")
 			return (checkKnights());
-		else if (name == "bishops")
+		else if (name == "bishop")
 			return (checkBishops());
 		else if (name == "queen")
 			return (checkQueen());
