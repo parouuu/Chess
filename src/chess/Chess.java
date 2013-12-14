@@ -33,6 +33,7 @@ public class Chess extends JPanel implements MouseListener {
 			}
 		}
 		player = true;
+		clic = true;
 		setPieces();
 	}
 
@@ -77,7 +78,8 @@ public class Chess extends JPanel implements MouseListener {
 			drawPieces(g2d);
 			g.drawImage(this.background, 0, 0, null);
 			drawPieces(g);
-			printTransparency(g);
+			if (!clic)
+				printTransparency(g);
 		}
 	
 	private void drawPieces(Graphics g) {
@@ -113,22 +115,46 @@ public class Chess extends JPanel implements MouseListener {
 		if (pl != null) {
 			for (pos p : pl)
 			{
-				System.out.print("\npos = (" + p.getX() + ";" + p.getY() + ")");
+				//System.out.print("\npos = (" + p.getX() + ";" + p.getY() + ")");
 				g.drawImage(transparency, (p.getX() * (675 / 8)) + 50, (p.getY() * (682 / 8)) + 49, null);
 			}
 		}
 	}
 	
+	private boolean isPosInArray(pos pclic) {
+		for (pos p : pl)
+		{
+			//System.out.print("\nP.getX() = " + p.getX() + "        Pclic.getX() = " + pclic.getX() + "     &&       P.getY() = " + p.getY() + "     Pclic.getY()" + pclic.getY());
+			if (p.getX() == pclic.getX() && p.getY() == pclic.getY())
+				return (true);
+		}
+		return (false);
+	}
+	
 	@Override
 	public void mousePressed(MouseEvent event) {
 		if (event.getButton() == MouseEvent.BUTTON1 && (event.getX() - 48) > 0 && (event.getX() < (44 + 675)) && (event.getY() - 47) > 0 && event.getY() < (682 + 44)) {		// if left button is pressed and the clic is in the board limits
-			this.oldx = (event.getX() - 48) / (675 / 8);		// get the X on the board 48
-			this.oldy = (event.getY() - 47)/ (682 / 8);			// get the Y on the game board 47
-			if (board[oldx][oldy] != null && board[oldx][oldy].getPlayer() == player ) {
+			this.x = (event.getX() - 48) / (675 / 8);		// get the X on the board 48
+			this.y = (event.getY() - 47)/ (682 / 8);			// get the Y on the game board 47
+			if (clic && board[x][y] != null && board[x][y].getPlayer() == player ) {
+				this.oldx = (event.getX() - 48) / (675 / 8);		// get the X on the board 48
+				this.oldy = (event.getY() - 47)/ (682 / 8);			// get the Y on the game board 47
 					pl = ref.checkMove(board[oldx][oldy], board.clone());
+					clic = !clic;
 					System.out.print("\nCLIC:(" + oldx + ";" + oldy + ")" + " = " + board[oldx][oldy].name + " | position piece = " + board[oldx][oldy].getPos().getX() + ":" + board[oldx][oldy].getPos().getY());
 				}
+			else if (!clic && isPosInArray(new pos(x, y))) {
+				board[x][y] = board[oldx][oldy];
+				board[oldx][oldy] = null;
+				board[x][y].setPos(new pos(x, y));
+				clic = !clic;
+				}
 			}
+		if (!clic && event.getButton() == MouseEvent.BUTTON2) {
+			clic = !clic;
+			System.out.print("\nOUI");
+			System.out.print(MouseEvent.BUTTON2);
+		}
 		repaint();
 	}
 
@@ -141,9 +167,10 @@ public class Chess extends JPanel implements MouseListener {
 	/** private fields **/
 	piece board[][];
 	int oldx, oldy;		// denotes where the player clicked when he pressed the mouse button
+	int x, y;
 	int oldposx, oldposy;
 	Image background, transparency;
-	boolean player;
+	boolean player, clic;
 	referee ref;
 	ArrayList<pos> pl; // List of possible moves for the last piece clicked
 }
