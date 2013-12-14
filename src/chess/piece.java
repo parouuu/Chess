@@ -8,7 +8,7 @@ public class piece {
 	pos		position;
 	String	name;
 	
-	public void 	piece(pos newPos, String newName, boolean newPlayer)
+	public piece(pos newPos, String newName, boolean newPlayer)
 	{
 		position = newPos.clone();
 		name = newName;
@@ -53,8 +53,17 @@ public class piece {
 	}
 
 	private ArrayList<ArrayList<pos>> checkQueen() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
+		for (int i = -1; i <= 1; i++)
+		{
+			ArrayList<pos> tmpDir = new ArrayList<pos>();
+			for (int j = -1; checkBoard(new pos(position.getX()-1, position.getY()+j)); j++)
+			{
+				tmpDir.add(new pos(position.getX()-1, position.getY()));
+			}
+			tmp.add(tmpDir);
+		}
+		return (tmp);
 	}
 
 	private ArrayList<ArrayList<pos>> checkBishops() {
@@ -122,28 +131,28 @@ public class piece {
 	private ArrayList<ArrayList<pos>> checkRocks() {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		ArrayList<pos> tmpDir1 = new ArrayList<pos>();
-		for (int i=0; checkBoard(new pos(position.getX()+i, position.getY()));i++)
+		for (int i=0; checkBoard(new pos(position.getX()+i, position.getY()));++i)
 				{
 					if (checkBoard(new pos(position.getX()-1, position.getY())))
 						tmpDir1.add(new pos(position.getX()-1, position.getY()));
 				}
 		tmp.add(tmpDir1);
 		ArrayList<pos> tmpDir2 = new ArrayList<pos>();
-		for (int i=0; checkBoard(new pos(position.getX(), position.getY()+i));i++)
+		for (int i=0; checkBoard(new pos(position.getX(), position.getY()+i));++i)
 				{
 					if (checkBoard(new pos(position.getX(), position.getY()+i)))
 						tmpDir2.add(new pos(position.getX(), position.getY()+i));
 				}
 		tmp.add(tmpDir2);
 		ArrayList<pos> tmpDir3 = new ArrayList<pos>();
-		for (int i=0; checkBoard(new pos(position.getX()-i, position.getY()));i++)
+		for (int i=0; checkBoard(new pos(position.getX()-i, position.getY()));++i)
 				{
 					if (checkBoard(new pos(position.getX()-i, position.getY())))
 						tmpDir3.add(new pos(position.getX()-i, position.getY()));
 				}
 		tmp.add(tmpDir3);
 		ArrayList<pos> tmpDir4 = new ArrayList<pos>();
-		for (int i=0; checkBoard(new pos(position.getX(), position.getY()-i));i++)
+		for (int i=0; checkBoard(new pos(position.getX(), position.getY()-i));++i)
 				{
 					if (checkBoard(new pos(position.getX(), position.getY()-i)))
 						tmpDir4.add(new pos(position.getX(), position.getY()-i));
