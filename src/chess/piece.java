@@ -80,14 +80,18 @@ public class piece {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		for (int i = -1; i <= 1; i++)
 		{
-			ArrayList<pos> tmpDir = new ArrayList<pos>();
 			for (int j = -1; j <= 1; j++)
 			{
-				if (checkBoard(new pos(position.getX()+i, position.getY()+j)))
-					tmpDir.add(new pos(position.getX()+i, position.getY()+j));
+				if (i == 0 && j == 0)
+				{}
+				else if (checkBoard(new pos(position.getX()+i, position.getY()+j)))
+					{
+						ArrayList<pos> tmpDir = new ArrayList<pos>();
+						tmpDir.add(new pos(position.getX()+i, position.getY()+j));
+						if (tmpDir.size() > 0)
+							tmp.add(tmpDir);
+					}
 			}
-			if (tmpDir.size() > 0)
-				tmp.add(tmpDir);
 		}
 		return (tmp);
 	}
@@ -97,26 +101,13 @@ public class piece {
 		
 		tmp.addAll(checkRocks());
 		tmp.addAll(checkBishops());
-		/*for (int i = -1; i <= 1; i++)
-		{
-			for (int j = -1; j <= 1; j++)
-			{
-				ArrayList<pos> tmpDir = new ArrayList<pos>();
-				for (int k=i, l = j; checkBoard(new pos(position.getX()+k, position.getY()+l));k = k + i, l = l + j)
-				{
-					tmpDir.add(new pos(position.getX()+k, position.getY()+l));
-				}
-				if (tmpDir.size() > 0)
-					tmp.add(tmpDir);
-			}
-		}*/
 		return (tmp);
 	}
 
 	private ArrayList<ArrayList<pos>> checkBishops() {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		ArrayList<pos> tmpDir1 = new ArrayList<pos>();
-		for (int i=0, j = 0; checkBoard(new pos(position.getX()+i, position.getY()+j));i++, j++)
+		for (int i=1, j = 1; checkBoard(new pos(position.getX()+i, position.getY()+j));i++, j++)
 				{
 						tmpDir1.add(new pos(position.getX()+i, position.getY()+j));
 				}
