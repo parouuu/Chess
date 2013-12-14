@@ -1,5 +1,6 @@
 package chess;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 public class piece {
@@ -7,12 +8,14 @@ public class piece {
 	boolean player;
 	pos		position;
 	String	name;
+	Image	img;
 	
-	public piece(pos newPos, String newName, boolean newPlayer)
+	public piece(pos newPos, String newName, boolean newPlayer, Image newImg)
 	{
 		position = newPos.clone();
 		name = newName;
 		player = newPlayer;
+		img = newImg;
 	}
 
 	public void 	move(pos newPos)
