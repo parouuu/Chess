@@ -36,7 +36,7 @@ public class referee {
 				posAfterCutView.add(tmp.get(j).clone());
 			}
 		}
-		return null;
+		return posAfterCutView;
 	}
 	
 }
