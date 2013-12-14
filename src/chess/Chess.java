@@ -31,26 +31,27 @@ public class Chess extends JPanel implements MouseListener {
 				board[i][j] = null;
 			}
 		}
+		player = true;
 		setPieces();
 	}
 
 	private void setPieces() {
-		board[0][0] = new piece(new pos(0,0), "rook", true, new ImageIcon("Image/BlackTower.png").getImage());
-		board[0][1] = new piece(new pos(0,1), "knight", true, new ImageIcon("Image/BlackHorse.png").getImage());
-		board[0][2] = new piece(new pos(0,2), "bishop", true, new ImageIcon("Image/BlackBishop.png").getImage());
-		board[0][3] = new piece(new pos(0,3), "king", true, new ImageIcon("Image/BlackKing.png").getImage());
-		board[0][4] = new piece(new pos(0,4), "queen", true, new ImageIcon("Image/BlackQueen.png").getImage());
-		board[0][5] = new piece(new pos(0,5), "bishop", true, new ImageIcon("Image/BlackBishop.png").getImage());
-		board[0][6] = new piece(new pos(0,6), "knight", true, new ImageIcon("Image/BlackHorse.png").getImage());
-		board[0][7] = new piece(new pos(0,7), "rook", true, new ImageIcon("Image/BlackTower.png").getImage());
-		board[1][0] = new piece(new pos(1,0), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
-		board[1][1] = new piece(new pos(1,1), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
-		board[1][2] = new piece(new pos(1,2), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
-		board[1][3] = new piece(new pos(1,3), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
-		board[1][4] = new piece(new pos(1,4), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
-		board[1][5] = new piece(new pos(1,5), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
-		board[1][6] = new piece(new pos(1,6), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
-		board[1][7] = new piece(new pos(1,7), "pawn", true, new ImageIcon("Image/BlackPawn.png").getImage());
+		board[0][0] = new piece(new pos(0,0), "rook", false, new ImageIcon("Image/BlackTower.png").getImage());
+		board[0][1] = new piece(new pos(0,1), "knight", false, new ImageIcon("Image/BlackHorse.png").getImage());
+		board[0][2] = new piece(new pos(0,2), "bishop", false, new ImageIcon("Image/BlackBishop.png").getImage());
+		board[0][3] = new piece(new pos(0,3), "king", false, new ImageIcon("Image/BlackKing.png").getImage());
+		board[0][4] = new piece(new pos(0,4), "queen", false, new ImageIcon("Image/BlackQueen.png").getImage());
+		board[0][5] = new piece(new pos(0,5), "bishop", false, new ImageIcon("Image/BlackBishop.png").getImage());
+		board[0][6] = new piece(new pos(0,6), "knight", false, new ImageIcon("Image/BlackHorse.png").getImage());
+		board[0][7] = new piece(new pos(0,7), "rook", false, new ImageIcon("Image/BlackTower.png").getImage());
+		board[1][0] = new piece(new pos(1,0), "pawn", false, new ImageIcon("Image/BlackPawn.png").getImage());
+		board[1][1] = new piece(new pos(1,1), "pawn", false, new ImageIcon("Image/BlackPawn.png").getImage());
+		board[1][2] = new piece(new pos(1,2), "pawn", false, new ImageIcon("Image/BlackPawn.png").getImage());
+		board[1][3] = new piece(new pos(1,3), "pawn", false, new ImageIcon("Image/BlackPawn.png").getImage());
+		board[1][4] = new piece(new pos(1,4), "pawn", false, new ImageIcon("Image/BlackPawn.png").getImage());
+		board[1][5] = new piece(new pos(1,5), "pawn", false, new ImageIcon("Image/BlackPawn.png").getImage());
+		board[1][6] = new piece(new pos(1,6), "pawn", false, new ImageIcon("Image/BlackPawn.png").getImage());
+		board[1][7] = new piece(new pos(1,7), "pawn", false, new ImageIcon("Image/BlackPawn.png").getImage());
 		board[7][0] = new piece(new pos(7,0), "rook", true, new ImageIcon("Image/WhiteTower.png").getImage());
 		board[7][1] = new piece(new pos(7,1), "knight", true, new ImageIcon("Image/WhiteHorse.png").getImage());
 		board[7][2] = new piece(new pos(7,2), "bishop", true, new ImageIcon("Image/WhiteBishop.png").getImage());
@@ -113,15 +114,15 @@ public class Chess extends JPanel implements MouseListener {
 			this.oldy = (event.getY() - 47)/ (682 / 8);		// get the Y on the game board 47
 			oldposx = event.getX();
 			oldposy = event.getY();
-			if (board[oldy][oldx] != null) {
-				ArrayList<pos> poslist = ref.checkMove(board[oldy][oldx], board.clone());
-				System.out.print("\nCLIC:(" + oldx + ";" + oldy + ")" + " = " + board[oldy][oldx].name);
-				/*for (pos p : poslist)
-				    {
-						System.out.print("\npos = (" + p.x + ";" + p.y + ")");
-				    }*/
+			if (board[oldy][oldx] != null && board[oldy][oldx].getPlayer() == player ) {
+					ArrayList<pos> poslist = ref.checkMove(board[oldy][oldx], board.clone());
+					System.out.print("\nCLIC:(" + oldx + ";" + oldy + ")" + " = " + board[oldy][oldx].name + "| pos piece = " + board[oldy][oldx].getPos().getX() + ":" + board[oldy][oldx].getPos().getY());
+					for (pos p : poslist)
+						{
+							System.out.print("\npos = (" + p.x + ";" + p.y + ")");
+						}
+				}
 			}
-		}
 		repaint();
 	}
 
@@ -136,5 +137,6 @@ public class Chess extends JPanel implements MouseListener {
 	int oldx, oldy;		// denotes where the player clicked when he pressed the mouse button
 	int oldposx, oldposy;
 	Image background;
+	boolean player;
 	referee ref;
 }

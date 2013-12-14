@@ -46,6 +46,18 @@ public class referee {
 				}
 			}
 		}
+		if (toMove.getName() == "knight")
+		{
+			for (int i = 0; i < possiblePos.size(); i++)
+			{
+				ArrayList<pos> tmp = possiblePos.get(i);
+				for (int j = 0; j < tmp.size(); j++)
+				{
+					if (cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] == null || (cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] != null && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()].getPlayer() != toMove.getPlayer()))
+						posAfterCutView.add(tmp.get(j).clone());
+				}
+			}
+		}
 		else
 		{
 			for (int i = 0; i < possiblePos.size(); i++)
