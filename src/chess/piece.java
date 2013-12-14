@@ -79,14 +79,18 @@ public class piece {
 				if (checkBoard(new pos(position.getX()+i, position.getY()+j)))
 					tmpDir.add(new pos(position.getX()+i, position.getY()+j));
 			}
-			tmp.add(tmpDir);
+			if (tmpDir.size() > 0)
+				tmp.add(tmpDir);
 		}
 		return (tmp);
 	}
 
 	private ArrayList<ArrayList<pos>> checkQueen() {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
-		for (int i = -1; i <= 1; i++)
+		
+		tmp.addAll(checkRocks());
+		tmp.addAll(checkBishops());
+		/*for (int i = -1; i <= 1; i++)
 		{
 			for (int j = -1; j <= 1; j++)
 			{
@@ -95,9 +99,10 @@ public class piece {
 				{
 					tmpDir.add(new pos(position.getX()+k, position.getY()+l));
 				}
-				tmp.add(tmpDir);
+				if (tmpDir.size() > 0)
+					tmp.add(tmpDir);
 			}
-		}
+		}*/
 		return (tmp);
 	}
 
@@ -109,28 +114,32 @@ public class piece {
 					if (checkBoard(new pos(position.getX()+i, position.getY()+j)))
 						tmpDir1.add(new pos(position.getX()+i, position.getY()+j));
 				}
-		tmp.add(tmpDir1);
+		if (tmpDir1.size() > 0)
+			tmp.add(tmpDir1);
 		ArrayList<pos> tmpDir2 = new ArrayList<pos>();
 		for (int i=0, j = 0; checkBoard(new pos(position.getX()+i, position.getY()+j));--i, ++j)
 		{
 			if (checkBoard(new pos(position.getX()+i, position.getY()+j)))
 				tmpDir2.add(new pos(position.getX()+i, position.getY()+j));
 		}
-		tmp.add(tmpDir2);
+		if (tmpDir2.size() > 0)
+			tmp.add(tmpDir2);
 		ArrayList<pos> tmpDir3 = new ArrayList<pos>();
 		for (int i=0, j = 0; checkBoard(new pos(position.getX()+i, position.getY()+j));--i, --j)
 		{
 			if (checkBoard(new pos(position.getX()+i, position.getY()+j)))
 				tmpDir3.add(new pos(position.getX()+i, position.getY()+j));
 		}
-		tmp.add(tmpDir3);
+		if (tmpDir3.size() > 0)
+			tmp.add(tmpDir3);
 		ArrayList<pos> tmpDir4 = new ArrayList<pos>();
 		for (int i=0, j = 0; checkBoard(new pos(position.getX()+i, position.getY()+j));++i, --j)
 		{
 			if (checkBoard(new pos(position.getX()+i, position.getY()+j)))
 				tmpDir4.add(new pos(position.getX()+i, position.getY()+j));
 		}
-		tmp.add(tmpDir4);
+		if (tmpDir4.size() > 0)
+			tmp.add(tmpDir4);
 		return tmp;
 	}
 
@@ -141,26 +150,30 @@ public class piece {
 			tmpDir1.add(new pos(position.getX()-2, position.getY()-1));
 		if (checkBoard(new pos(position.getX()-2, position.getY()+1)))
 			tmpDir1.add(new pos(position.getX()-2, position.getY()+1));
-		tmp.add(tmpDir1);
+		if (tmpDir1.size() > 0)
+			tmp.add(tmpDir1);
 		ArrayList<pos> tmpDir2 = new ArrayList<pos>();
 		if (checkBoard(new pos(position.getX()-1, position.getY()-2)))
 			tmpDir2.add(new pos(position.getX()-1, position.getY()-2));
 		if (checkBoard(new pos(position.getX()+1, position.getY()-2)))
 			tmpDir2.add(new pos(position.getX()+1, position.getY()-2));
-		tmp.add(tmpDir2);
+		if (tmpDir2.size() > 0)
+			tmp.add(tmpDir2);
 		ArrayList<pos> tmpDir3 = new ArrayList<pos>();
 		if (checkBoard(new pos(position.getX()+2, position.getY()-1)))
 			tmpDir3.add(new pos(position.getX()+2, position.getY()-1));
 		if (checkBoard(new pos(position.getX()+2, position.getY()+1)))
 			tmpDir3.add(new pos(position.getX()+2, position.getY()+1));
-		tmp.add(tmpDir3);
+		if (tmpDir3.size() > 0)
+			tmp.add(tmpDir3);
 		ArrayList<pos> tmpDir4 = new ArrayList<pos>();
 		if (checkBoard(new pos(position.getX()-1, position.getY()+2)))
 			tmpDir4.add(new pos(position.getX()-1, position.getY()+2));
 		if (checkBoard(new pos(position.getX()+1, position.getY()+2)))
 			tmpDir4.add(new pos(position.getX()+1, position.getY()+2));
-		tmp.add(tmpDir4);
-		return null;
+		if (tmpDir4.size() > 0)
+			tmp.add(tmpDir4);
+		return tmp;
 	}
 
 	private ArrayList<ArrayList<pos>> checkRocks() {
@@ -171,28 +184,32 @@ public class piece {
 					if (checkBoard(new pos(position.getX()-1, position.getY())))
 						tmpDir1.add(new pos(position.getX()-1, position.getY()));
 				}
-		tmp.add(tmpDir1);
+		if (tmpDir1.size() > 0)
+			tmp.add(tmpDir1);
 		ArrayList<pos> tmpDir2 = new ArrayList<pos>();
 		for (int i=0; checkBoard(new pos(position.getX(), position.getY()+i));++i)
 				{
 					if (checkBoard(new pos(position.getX(), position.getY()+i)))
 						tmpDir2.add(new pos(position.getX(), position.getY()+i));
 				}
-		tmp.add(tmpDir2);
+		if (tmpDir2.size() > 0)
+			tmp.add(tmpDir2);
 		ArrayList<pos> tmpDir3 = new ArrayList<pos>();
 		for (int i=0; checkBoard(new pos(position.getX()-i, position.getY()));++i)
 				{
 					if (checkBoard(new pos(position.getX()-i, position.getY())))
 						tmpDir3.add(new pos(position.getX()-i, position.getY()));
 				}
-		tmp.add(tmpDir3);
+		if (tmpDir3.size() > 0)
+			tmp.add(tmpDir3);
 		ArrayList<pos> tmpDir4 = new ArrayList<pos>();
 		for (int i=0; checkBoard(new pos(position.getX(), position.getY()-i));++i)
 				{
 					if (checkBoard(new pos(position.getX(), position.getY()-i)))
 						tmpDir4.add(new pos(position.getX(), position.getY()-i));
 				}
-		tmp.add(tmpDir4);
+		if (tmpDir4.size() > 0)
+			tmp.add(tmpDir4);
 		return tmp;
 	}
 
@@ -209,7 +226,8 @@ public class piece {
 				ArrayList<pos> tmpDir = new ArrayList<pos>();
 				if (checkBoard(new pos(position.getX()-1, position.getY()+j)))
 					tmpDir.add(new pos(position.getX()-1, position.getY()));
-				tmp.add(tmpDir);
+				if (tmpDir.size() > 0)
+					tmp.add(tmpDir);
 			}
 			return (tmp);
 		}
@@ -220,7 +238,8 @@ public class piece {
 			{
 				if (checkBoard(new pos(position.getX()+1, position.getY()+j)))
 					tmpDir.add(new pos(position.getX()+1, position.getY()));
-				tmp.add(tmpDir);
+				if (tmpDir.size() > 0)
+					tmp.add(tmpDir);
 			}
 			return (tmp);
 		}
