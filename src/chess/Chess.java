@@ -63,7 +63,7 @@ public class Chess extends JPanel implements MouseListener {
 		board[6][7] = new piece(new pos(6,7), "knight", true, new ImageIcon("Image/WhiteHorse.png").getImage());
 		board[7][7] = new piece(new pos(7,7), "rook", true, new ImageIcon("Image/WhiteTower.png").getImage());
 		board[0][6] = new piece(new pos(0,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
-		board[1][6] = new piece(new pos(0,5), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
+		board[1][6] = new piece(new pos(1,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
 		board[2][6] = new piece(new pos(2,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
 		board[3][6] = new piece(new pos(3,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
 		board[4][6] = new piece(new pos(4,6), "pawn", true, new ImageIcon("Image/WhitePawn.png").getImage());
