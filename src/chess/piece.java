@@ -18,8 +18,18 @@ public class piece {
 		img = newImg;
 	}
 
-	public Image getImage() {
+	public String	getName()
+	{
+		return (name);
+	}
+	
+	public Image 	getImage() {
 		return (img);
+	}
+	
+	public boolean	getPlayer()
+	{
+		return (player);
 	}
 	
 	public void 	move(pos newPos)
