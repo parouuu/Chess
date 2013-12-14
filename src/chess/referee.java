@@ -34,6 +34,7 @@ public class referee {
 			{
 				ArrayList<pos> tmp = possiblePos.get(i);
 				int j = 0;
+				System.out.print("test pion : " + tmp.get(j).getX() + "" + tmp.get(j).getY() + "\n");
 				if (tmp.get(j).getX() != toMove.getPos().getX() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] != null && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()].getPlayer() != toMove.getPlayer())
 					{
 						posAfterCutView.add(tmp.get(j).clone());

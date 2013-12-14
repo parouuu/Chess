@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class piece {
 	
 	boolean player;
+	boolean hasMoved;
 	pos		position;
 	String	name;
 	Image	img;
@@ -16,6 +17,7 @@ public class piece {
 		name = newName;
 		player = newPlayer;
 		img = newImg;
+		hasMoved = false;
 	}
 
 	public String	getName()
@@ -40,6 +42,7 @@ public class piece {
 	public void 	move(pos newPos)
 	{
 		position = newPos.clone();
+		hasMoved = true;
 	}
 	
 	private	boolean checkBoard(pos checkPos)
@@ -116,21 +119,21 @@ public class piece {
 		if (tmpDir1.size() > 0)
 			tmp.add(tmpDir1);
 		ArrayList<pos> tmpDir2 = new ArrayList<pos>();
-		for (int i=1, j = 1; checkBoard(new pos(position.getX()+i, position.getY()+j));i--, j++)
+		for (int i=-1, j = 1; checkBoard(new pos(position.getX()+i, position.getY()+j));i--, j++)
 		{
 				tmpDir2.add(new pos(position.getX()+i, position.getY()+j));
 		}
 		if (tmpDir2.size() > 0)
 			tmp.add(tmpDir2);
 		ArrayList<pos> tmpDir3 = new ArrayList<pos>();
-		for (int i=1, j = 1; checkBoard(new pos(position.getX()+i, position.getY()+j));i--, j--)
+		for (int i=-1, j = -1; checkBoard(new pos(position.getX()+i, position.getY()+j));i--, j--)
 		{
 				tmpDir3.add(new pos(position.getX()+i, position.getY()+j));
 		}
 		if (tmpDir3.size() > 0)
 			tmp.add(tmpDir3);
 		ArrayList<pos> tmpDir4 = new ArrayList<pos>();
-		for (int i=1, j = 1; checkBoard(new pos(position.getX()+i, position.getY()+j));i++, j--)
+		for (int i=1, j = -1; checkBoard(new pos(position.getX()+i, position.getY()+j));i++, j--)
 		{
 				tmpDir4.add(new pos(position.getX()+i, position.getY()+j));
 		}
@@ -213,11 +216,13 @@ public class piece {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		if (player)
 		{
-			for (int j = -1; j <= 1; j++)
+			for (int i = -1; i <= 1; i++)
 			{
 				ArrayList<pos> tmpDir = new ArrayList<pos>();
-				if (checkBoard(new pos(position.getX()-1, position.getY()+j)))
-					tmpDir.add(new pos(position.getX()-1, position.getY()+j));
+				if (checkBoard(new pos(position.getX()+i, position.getY()-1)))
+					tmpDir.add(new pos(position.getX()+i, position.getY()-1));
+				if (hasMoved == false && checkBoard(new pos(position.getX()+i, position.getY()-2)))
+					tmpDir.add(new pos(position.getX()+i, position.getY()-2));
 				if (tmpDir.size() > 0)
 					tmp.add(tmpDir);
 			}
@@ -226,10 +231,12 @@ public class piece {
 		else
 		{
 			ArrayList<pos> tmpDir = new ArrayList<pos>();
-			for (int j = -1; j <= 1; j++)
+			for (int i = -1; i <= 1; i++)
 			{
-				if (checkBoard(new pos(position.getX()+1, position.getY()+j)))
-					tmpDir.add(new pos(position.getX()+1, position.getY()+j));
+				if (checkBoard(new pos(position.getX()+i, position.getY()+1)))
+					tmpDir.add(new pos(position.getX()+i, position.getY()+1));
+				if (hasMoved == false && checkBoard(new pos(position.getX()+i, position.getY()+2)))
+					tmpDir.add(new pos(position.getX()+i, position.getY()+2));
 				if (tmpDir.size() > 0)
 					tmp.add(tmpDir);
 			}
