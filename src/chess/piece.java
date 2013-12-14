@@ -18,6 +18,10 @@ public class piece {
 		img = newImg;
 	}
 
+	public Image getImage() {
+		return (img);
+	}
+	
 	public void 	move(pos newPos)
 	{
 		position = newPos.clone();

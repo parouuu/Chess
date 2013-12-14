@@ -33,14 +33,14 @@ public class Chess extends JPanel implements MouseListener {
 	}
 
 	private void setPieces() {
-		board[0][0] = new piece(new pos(0,0), "tower", true, null);
-		board[0][1] = new piece(new pos(0,1), "cheval", true, null);
-		board[0][2] = new piece(new pos(0,2), "bishop", true, null);
-		board[0][3] = new piece(new pos(0,3), "king", true, null);
-		board[0][4] = new piece(new pos(0,4), "queen", true, null);
-		board[0][5] = new piece(new pos(0,5), "bishop", true, null);
-		board[0][6] = new piece(new pos(0,6), "cheval", true, null);
-		board[0][7] = new piece(new pos(0,7), "tower", true, null);
+		board[0][0] = new piece(new pos(0,0), "tower", true, new ImageIcon("Image/BlackTower.png").getImage());
+		board[0][1] = new piece(new pos(0,1), "cheval", true, new ImageIcon("Image/BlackHorse.png").getImage());
+		board[0][2] = new piece(new pos(0,2), "bishop", true, new ImageIcon("Image/BlackBishop.png").getImage());
+		board[0][3] = new piece(new pos(0,3), "king", true, new ImageIcon("Image/BlackKing.png").getImage());
+		board[0][4] = new piece(new pos(0,4), "queen", true, new ImageIcon("Image/BlackQueen.png").getImage());
+		board[0][5] = new piece(new pos(0,5), "bishop", true, new ImageIcon("Image/BlackBishop.png").getImage());
+		board[0][6] = new piece(new pos(0,6), "cheval", true, new ImageIcon("Image/BlackHorse.png").getImage());
+		board[0][7] = new piece(new pos(0,7), "tower", true, new ImageIcon("Image/BlackTower.png").getImage());
 	}
 	
 	// repaints the widget when an update of any kind is made
@@ -48,6 +48,7 @@ public class Chess extends JPanel implements MouseListener {
 			Graphics2D g2d = (Graphics2D)g;
 			drawPieces(g2d);
 			g.drawImage(this.background, 0, 0, null);
+			g.drawImage(board[oldy][oldx].getImage(), oldposy, oldposx, null);
 		}
 	
 	private void drawPieces(Graphics2D g2d) {
@@ -79,8 +80,11 @@ public class Chess extends JPanel implements MouseListener {
 		if (event.getButton() == MouseEvent.BUTTON1 && (event.getX() - 48) > 0 && (event.getX() < (44 + 675)) && (event.getY() - 47) > 0 && event.getY() < (682 + 44)) {		// if left button is pressed and the clic is in the board limits
 		this.oldx = (event.getX() - 48) / (675 / 8);		// get the X on the board 48
 		this.oldy = (event.getY() - 47)/ (682 / 8);		// get the Y on the game board 47
+		oldposx = (event.getX() - 48) / (675 / 8);
+		oldposy = (event.getY() - 47)/ (682 / 8);
 		System.out.print("\nCLIC:(" + oldx + ";" + oldy + ")" + " = " + board[oldy][oldx]);
 		}
+		repaint();
 	}
 
 	@Override
@@ -92,5 +96,6 @@ public class Chess extends JPanel implements MouseListener {
 	/** private fields **/
 	piece board[][];
 	int oldx, oldy;		// denotes where the player clicked when he pressed the mouse button
+	int oldposx, oldposy;
 
 }
