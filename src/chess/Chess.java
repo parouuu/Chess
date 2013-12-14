@@ -6,11 +6,12 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class Chess extends JPanel implements MouseListener {
-	Image background;
 	
 	/** constructors **/
 	public Chess() {
@@ -73,7 +74,6 @@ public class Chess extends JPanel implements MouseListener {
 			drawPieces(g2d);
 			g.drawImage(this.background, 0, 0, null);
 			drawPieces(g);
-			//g.drawImage(board[oldy][oldx].getImage(), (oldx * (675 / 8)) + 48, (oldy * (682 / 8)) + 47, null);
 		}
 	
 	private void drawPieces(Graphics g) {
@@ -107,13 +107,19 @@ public class Chess extends JPanel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent event) {
-		//System.out.print("CLIC:(" + event.getX() + ";" + event.getY() + ")");
 		if (event.getButton() == MouseEvent.BUTTON1 && (event.getX() - 48) > 0 && (event.getX() < (44 + 675)) && (event.getY() - 47) > 0 && event.getY() < (682 + 44)) {		// if left button is pressed and the clic is in the board limits
-		this.oldx = (event.getX() - 48) / (675 / 8);		// get the X on the board 48
-		this.oldy = (event.getY() - 47)/ (682 / 8);		// get the Y on the game board 47
-		oldposx = event.getX();
-		oldposy = event.getY();
-		System.out.print("\nCLIC:(" + oldx + ";" + oldy + ")" + " = " + board[oldy][oldx].name);
+			this.oldx = (event.getX() - 48) / (675 / 8);		// get the X on the board 48
+			this.oldy = (event.getY() - 47)/ (682 / 8);		// get the Y on the game board 47
+			oldposx = event.getX();
+			oldposy = event.getY();
+			if (board[oldy][oldx] != null) {
+				ArrayList<pos> poslist = ref.checkMove(board[oldy][oldx], board.clone());
+				System.out.print("\nCLIC:(" + oldx + ";" + oldy + ")" + " = " + board[oldy][oldx].name);
+				/*for (pos p : poslist)
+				    {
+						System.out.print("\npos = (" + p.x + ";" + p.y + ")");
+				    }*/
+			}
 		}
 		repaint();
 	}
@@ -128,5 +134,6 @@ public class Chess extends JPanel implements MouseListener {
 	piece board[][];
 	int oldx, oldy;		// denotes where the player clicked when he pressed the mouse button
 	int oldposx, oldposy;
-
+	Image background;
+	referee ref;
 }
