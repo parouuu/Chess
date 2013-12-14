@@ -11,11 +11,11 @@ public class referee {
 
 	public ArrayList<pos> checkMove(piece toMove, piece board[][])
 	{
-		piece	cloneBoard[][] = board.clone();
+		piece	cloneBoard[][] = board;
 		ArrayList<ArrayList<pos>> tmp = toMove.checkMove();
 		ArrayList<pos> ret;
 		
-		ret = this.cutView(tmp, cloneBoard);
+		ret = this.cutView(tmp, cloneBoard, toMove);
 		this.cutMate(ret, cloneBoard);
 		return ret;
 	}
@@ -25,15 +25,40 @@ public class referee {
 		
 	}
 
-	private ArrayList<pos> cutView(ArrayList<ArrayList<pos>> possiblePos, piece[][] cloneBoard) {
+	private ArrayList<pos> cutView(ArrayList<ArrayList<pos>> possiblePos, piece[][] cloneBoard, piece toMove) {
 		ArrayList<pos> posAfterCutView = new ArrayList<pos>();
 		
-		for (int i = 0; i < possiblePos.size(); i++)
+		if (toMove.getName() == "pawn")
 		{
-			ArrayList<pos> tmp = possiblePos.get(i);
-			for (int j = 0; cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] == null; j++)
+			for (int i = 0; i < possiblePos.size(); i++)
 			{
-				posAfterCutView.add(tmp.get(j).clone());
+				ArrayList<pos> tmp = possiblePos.get(i);
+				int j = 0;
+				if (tmp.get(j).getX() != toMove.getPos().getX() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] != null && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()].getPlayer() != toMove.getPlayer())
+					posAfterCutView.add(tmp.get(j).clone());
+				else if (tmp.get(j).getX() == toMove.getPos().getX())
+				{
+					while (j < tmp.size() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] == null)
+					{
+						posAfterCutView.add(tmp.get(j).clone());
+						j++;
+					}
+				}
+			}
+		}
+		else
+		{
+			for (int i = 0; i < possiblePos.size(); i++)
+			{
+				ArrayList<pos> tmp = possiblePos.get(i);
+				int j = 0;
+				while (j < tmp.size() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] == null)
+				{
+					posAfterCutView.add(tmp.get(j).clone());
+					j++;
+				}
+				if (j < tmp.size() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()].getPlayer() !=  toMove.getPlayer())
+					posAfterCutView.add(tmp.get(j).clone());
 			}
 		}
 		return posAfterCutView;
