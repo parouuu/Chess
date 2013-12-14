@@ -25,8 +25,17 @@ public class referee {
 		
 	}
 
-	private ArrayList<pos> cutView(ArrayList<ArrayList<pos>> tmp, piece[][] cloneBoard) {
+	private ArrayList<pos> cutView(ArrayList<ArrayList<pos>> possiblePos, piece[][] cloneBoard) {
+		ArrayList<pos> posAfterCutView = new ArrayList<pos>();
 		
+		for (int i = 0; i < possiblePos.size(); i++)
+		{
+			ArrayList<pos> tmp = possiblePos.get(i);
+			for (int j = 0; cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] == null; j++)
+			{
+				posAfterCutView.add(tmp.get(j).clone());
+			}
+		}
 		return null;
 	}
 	

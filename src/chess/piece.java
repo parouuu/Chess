@@ -32,6 +32,11 @@ public class piece {
 		return (player);
 	}
 	
+	public	pos		getPos()
+	{
+		return (position.clone());
+	}
+	
 	public void 	move(pos newPos)
 	{
 		position = newPos.clone();
