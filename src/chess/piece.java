@@ -204,35 +204,22 @@ public class piece {
 		 * first check to move pawn into the board
 		 * Check for the player One or Two
 		 * */
+		int j = -1;
+		if (!player)
+			j = 1;
+			
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
-		if (player)
-		{
-			for (int i = -1; i <= 1; i++)
+		for (int i = -1; i <= 1; i++)
 			{
 				ArrayList<pos> tmpDir = new ArrayList<pos>();
-				if (checkBoard(new pos(position.getX()+i, position.getY()-1)))
-					tmpDir.add(new pos(position.getX()+i, position.getY()-1));
-				if (hasMoved == false && checkBoard(new pos(position.getX()+i, position.getY()-2)))
-					tmpDir.add(new pos(position.getX()+i, position.getY()-2));
+				if (checkBoard(new pos(position.getX()+i, position.getY()+j)))
+					tmpDir.add(new pos(position.getX()+i, position.getY()+j));
+				if (hasMoved == false && checkBoard(new pos(position.getX()+i, position.getY()+j+j)))
+					tmpDir.add(new pos(position.getX()+i, position.getY()+j+j));
 				if (tmpDir.size() > 0)
 					tmp.add(tmpDir);
 			}
-			return (tmp);
-		}
-		else
-		{
-			ArrayList<pos> tmpDir = new ArrayList<pos>();
-			for (int i = -1; i <= 1; i++)
-			{
-				if (checkBoard(new pos(position.getX()+i, position.getY()+1)))
-					tmpDir.add(new pos(position.getX()+i, position.getY()+1));
-				if (hasMoved == false && checkBoard(new pos(position.getX()+i, position.getY()+2)))
-					tmpDir.add(new pos(position.getX()+i, position.getY()+2));
-				if (tmpDir.size() > 0)
-					tmp.add(tmpDir);
-			}
-			return (tmp);
-		}
+		return (tmp);
 	}
 	
 }
