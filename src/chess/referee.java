@@ -32,7 +32,7 @@ public class referee {
 				if (cloneBoardTmp[i][j] != null && cloneBoardTmp[i][j].getPlayer() == player)
 					possiblePos.addAll(this.checkMove(cloneBoardTmp[i][j], cloneBoardTmp, false));
 			}
-		}		
+		}
 		return (possiblePos);
 	}
 	
@@ -48,6 +48,35 @@ public class referee {
 			
 		}
 		return (null);
+	}
+	
+	public	int					checkMate(piece[][] board, boolean player)
+	{
+		piece[][] tmp = this.cloneBoard(board);
+		int	posibility = 0;
+		int checkCase = 0;
+		
+		if (this.checkMateAfterMove(tmp, player) == false)
+		{
+			for (int i = 0; i < 8; i++)
+			{
+				for (int j = 0; j < 8; j++)
+				{
+					if (tmp[i][j] != null && tmp[i][j].getPlayer() == player)
+						{
+						if (this.checkMove(tmp[i][j], tmp, true).size() == 0)
+							checkCase++;
+						posibility++;
+						}
+				}
+			}
+		}
+		if (checkCase == 0)
+			return (0);
+		else if (posibility == checkCase)
+			return (2);
+		else
+			return (1);
 	}
 	
 	private boolean				checkMateAfterMove(piece[][] cloneBoard, boolean player)
@@ -72,7 +101,7 @@ public class referee {
 		
 		ret = this.cutView(tmp, cloneBoard, toMove);
 		if (checkMate)
-			ret =this.cutMate(ret, board.clone(), toMove);
+			ret = this.cutMate(ret, board.clone(), toMove);
 		return ret;
 	}
 
@@ -107,7 +136,6 @@ public class referee {
 			{
 				ArrayList<pos> tmp = possiblePos.get(i);
 				int j = 0;
-				System.out.print("test pion : " + tmp.get(j).getX() + "" + tmp.get(j).getY() + "\n");
 				if (tmp.get(j).getX() != toMove.getPos().getX() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] != null && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()].getPlayer() != toMove.getPlayer())
 					{
 						posAfterCutView.add(tmp.get(j).clone());
@@ -143,7 +171,6 @@ public class referee {
 				while (j < tmp.size() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()] == null)
 				{
 					posAfterCutView.add(tmp.get(j).clone());
-					System.out.print("test : " + tmp.get(j).getX() + ":"+ tmp.get(j).getY() +"\n");
 					j++;
 				}
 				if (j < tmp.size() && cloneBoard[tmp.get(j).getX()][tmp.get(j).getY()].getPlayer() !=  toMove.getPlayer())

@@ -197,6 +197,11 @@ public class Chess extends JPanel implements MouseListener {
 				player = !player;
 				if (board[x][y].getName() == "pawn" && ((board[x][y].getPlayer() == false && y == 7) || (board[x][y].getPlayer() == true && y == 0))) 
 					createPiece(pawnChoice(), board[x][y]);
+				int checkState = ref.checkMate(board, player);
+				if (checkState == 1)
+					System.out.print("ECHEC!!");
+				else if (checkState == 2)
+					System.out.print("ECHEC ET MATE!!");
 				}
 			}
 		if (!clic && event.getButton() == MouseEvent.BUTTON3)
