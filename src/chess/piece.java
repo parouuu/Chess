@@ -54,6 +54,9 @@ public class piece {
 		return (true);
 	}
 	
+	/*
+	 * return all moves of the piece
+	 * */
 	public ArrayList<ArrayList<pos>>	checkMove()
 	{
 		if (name == "pawn")
@@ -72,6 +75,9 @@ public class piece {
 			return (null);
 	}
 
+	/*
+	 * return all moves of the piece if it's a king
+	 * */
 	private ArrayList<ArrayList<pos>> checkKing() {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		for (int i = -1; i <= 1; i++)
@@ -92,6 +98,9 @@ public class piece {
 		return (tmp);
 	}
 
+	/*
+	 * return all moves of the piece if it's a Queen
+	 * */
 	private ArrayList<ArrayList<pos>> checkQueen() {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		
@@ -100,6 +109,9 @@ public class piece {
 		return (tmp);
 	}
 
+	/*
+	 * return all moves of the piece if it's a bishop
+	 * */
 	private ArrayList<ArrayList<pos>> checkBishops() {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		ArrayList<pos> tmpDir1 = new ArrayList<pos>();
@@ -133,6 +145,9 @@ public class piece {
 		return tmp;
 	}
 
+	/*
+	 * return all moves of the piece if it's a knight
+	 * */
 	private ArrayList<ArrayList<pos>> checkKnights() {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		ArrayList<pos> tmpDir1 = new ArrayList<pos>();
@@ -166,6 +181,9 @@ public class piece {
 		return tmp;
 	}
 
+	/*
+	 * return all moves of the piece if it's a rock
+	 * */
 	private ArrayList<ArrayList<pos>> checkRocks() {
 		ArrayList<ArrayList<pos>>	tmp = new ArrayList<ArrayList<pos>>();
 		ArrayList<pos> tmpDir1 = new ArrayList<pos>();
@@ -199,6 +217,9 @@ public class piece {
 		return tmp;
 	}
 
+	/*
+	 * return all moves of the piece if it's a pawn
+	 * */
 	private ArrayList<ArrayList<pos>> checkPawns() {
 		/*
 		 * first check to move pawn into the board

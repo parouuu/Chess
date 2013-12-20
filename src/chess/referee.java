@@ -9,6 +9,7 @@ public class referee {
 		
 	}
 	
+	/*simulate a move of piece*/
 	private void			simulMove(piece toMove, piece[][] cloneBoard,  pos newPos)
 	{
 		int x = toMove.getPos().getX();
@@ -21,6 +22,7 @@ public class referee {
 		cloneBoard[x][y] = null;
 	}
 	
+	/*return all positions wich can be taken by the player with all his pieces*/
 	private ArrayList<pos>	getAllPossibleMove(piece[][] cloneBoardTmp, boolean player)
 	{
 		ArrayList<pos> possiblePos = new ArrayList<pos>();
@@ -36,6 +38,7 @@ public class referee {
 		return (possiblePos);
 	}
 	
+	/*return the position of king's player*/
 	private pos				getPosKing(piece[][] cloneBoard, boolean player)
 	{
 		for (int i = 0; i < 8; i++)
@@ -50,6 +53,11 @@ public class referee {
 		return (null);
 	}
 	
+	/*check if the player is check or checkmate
+	 * return 0 if the player is not check
+	 * return 1 if the player is check
+	 * return 2 if the player is checkmate
+	 * */
 	public	int					checkMate(piece[][] board, boolean player)
 	{
 		piece[][] tmp = this.cloneBoard(board);
@@ -79,6 +87,11 @@ public class referee {
 			return (1);
 	}
 	
+	
+	/*check if the player can move his piece
+	 * return true the player can
+	 * return false if the player can't
+	 * */
 	private boolean				checkMateAfterMove(piece[][] cloneBoard, boolean player)
 	{
 		pos	king = this.getPosKing(cloneBoard, player);
@@ -93,6 +106,9 @@ public class referee {
 		return (checkPos);
 	}
 
+	/*
+	 * return all possible moves for the selected piece
+	 * */
 	public ArrayList<pos> checkMove(piece toMove, piece board[][], boolean checkMate)
 	{
 		piece	cloneBoard[][] = board;
@@ -105,6 +121,9 @@ public class referee {
 		return ret;
 	}
 
+	/*
+	 * clone the board
+	 * */
 	private piece[][]	cloneBoard(piece[][] board)
 	{
 		piece[][] tmp = new piece[8][8];
@@ -115,6 +134,9 @@ public class referee {
 		return (tmp);
 	}
 	
+	/*
+	 * return all possible moves for the selected piece without moves wich put the player in check 
+	 * */
 	private ArrayList<pos> cutMate(ArrayList<pos> ret, piece[][] cloneBoard, piece toMove) {
 		ArrayList<pos> tmp = new ArrayList<pos>();
 		for (int i = 0; i < ret.size();i++)
