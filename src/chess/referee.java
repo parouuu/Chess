@@ -72,7 +72,7 @@ public class referee {
 		
 		ret = this.cutView(tmp, cloneBoard, toMove);
 		if (checkMate)
-			this.cutMate(ret, board.clone(), toMove);
+			ret =this.cutMate(ret, board.clone(), toMove);
 		return ret;
 	}
 
@@ -86,15 +86,16 @@ public class referee {
 		return (tmp);
 	}
 	
-	private void cutMate(ArrayList<pos> ret, piece[][] cloneBoard, piece toMove) {
+	private ArrayList<pos> cutMate(ArrayList<pos> ret, piece[][] cloneBoard, piece toMove) {
+		ArrayList<pos> tmp = new ArrayList<pos>();
 		for (int i = 0; i < ret.size();i++)
 		{
 			piece[][] cloneBoardTmp = this.cloneBoard(cloneBoard);
 			this.simulMove(toMove, cloneBoardTmp, ret.get(i));
-			if (this.checkMateAfterMove(cloneBoardTmp, toMove.getPlayer()) == false)
-				ret.remove(i);
-			
+			if (this.checkMateAfterMove(cloneBoardTmp, toMove.getPlayer()) != false)
+				tmp.add(ret.get(i).clone());
 		}
+		return (tmp);
 	}
 
 	private ArrayList<pos> cutView(ArrayList<ArrayList<pos>> possiblePos, piece[][] cloneBoard, piece toMove) {
