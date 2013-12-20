@@ -1,6 +1,7 @@
 package chess;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,34 +10,30 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Chess extends JPanel implements MouseListener {
 	
 	/** constructors **/
 	public Chess() {
-		this.background = new ImageIcon("Image/chessboard.jpg").getImage();
-		this.transparency = new ImageIcon("Image/transparency.png").getImage();
-		initGame();
-		addMouseListener(this);
-		this.setMinimumSize(new Dimension(641, 641));
-		ref = new referee();
+		this.background = new ImageIcon("Image/chessboard.jpg").getImage(); 	// Save background's image
+		this.transparency = new ImageIcon("Image/transparency.png").getImage();	// Save Transparency's image
+		initGame();		// Initialize the game
+		addMouseListener(this);	// Add a mouse listener to this
+		this.setMinimumSize(new Dimension(641, 641));	// Set a minimum size to panel
+		ref = new referee();		// Create a referee
 	}
 	
+	// Initialize the game
 	private void initGame() {
-		board = new piece[8][8];
-		for (int i = 2; i < 6; i++)
-		{
-			for (int j = 0; j < 8; j++)
-			{
-				board[i][j] = null;
-			}
-		}
-		player = true;
-		clic = true;
-		setPieces();
+		board = new piece[8][8];		//Create the board
+		player = true;		// Set the first player to act
+		clic = true;		// Set the state of player's clic (if the player already made a valide clic, clic becomes false)
+		setPieces();		// Create and set pieces on the board
 	}
 
+	// Create all the default pieces and set them in the board
 	private void setPieces() {
 		board[0][0] = new piece(new pos(0,0), "rook", false, new ImageIcon("Image/BlackTower.png").getImage());
 		board[1][0] = new piece(new pos(1,0), "knight", false, new ImageIcon("Image/BlackHorse.png").getImage());
@@ -80,6 +77,17 @@ public class Chess extends JPanel implements MouseListener {
 			drawPieces(g);
 			if (!clic)
 				printTransparency(g);
+			g2d.setFont(new Font("Tahoma", Font.BOLD, 18));		// change font and size of next text draw
+			g2d.drawString("Player's turn", 795, 77);
+			g2d.drawLine(787, 57, 917, 57);
+			g2d.drawLine(787, 84, 917, 84);
+			g2d.drawLine(787, 200, 917, 200);
+			g2d.drawLine(787, 57, 787, 200);
+			g2d.drawLine(917, 57, 917, 200);
+			if (player == false)
+				g.drawImage(new ImageIcon("Image/BlackPawn.png").getImage(), 812,100, null);
+			else
+				g.drawImage(new ImageIcon("Image/WhitePawn.png").getImage(), 812,100, null);	
 		}
 	
 	private void drawPieces(Graphics g) {
@@ -131,6 +139,44 @@ public class Chess extends JPanel implements MouseListener {
 		return (false);
 	}
 	
+	private String pawnChoice() {
+		String choices[] = {"rook", "knight", "bishop", "queen"};
+		String input = (String)JOptionPane.showInputDialog(this, "Choose your piece", "Promotion !", JOptionPane.QUESTION_MESSAGE, null, choices, choices[3]);
+		return input;
+	}
+	private void createPiece(String name, piece p) {
+		if (name == "rook") {
+			p.name = "rook";
+			if (p.getPlayer() == false)
+				p.img = new ImageIcon("Image/BlackTower.png").getImage();
+			else
+				p.img = new ImageIcon("Image/WhiteTower.png").getImage();
+		}
+		else if (name == "knight") {
+			p.name = "knight";
+			if (p.getPlayer() == false)
+				p.img = new ImageIcon("Image/BlackHorse.png").getImage();
+			else
+				p.img = new ImageIcon("Image/WhiteHorse.png").getImage();
+				
+		}
+		else if (name == "bishop") {
+			p.name = "bishop";
+			if (p.getPlayer() == false)
+				p.img = new ImageIcon("Image/BlackBishop.png").getImage();
+			else
+				p.img = new ImageIcon("Image/WhiteBishop.png").getImage();
+		}
+		else if (name == "queen") {
+			p.name = "queen";
+			if (p.getPlayer() == false)
+				p.img = new ImageIcon("Image/BlackQueen.png").getImage();
+			else
+				p.img = new ImageIcon("Image/WhiteQueen.png").getImage();
+				
+		}
+	}
+	
 	@Override
 	public void mousePressed(MouseEvent event) {
 		if (event.getButton() == MouseEvent.BUTTON1 && (event.getX() - 48) > 0 && (event.getX() < (44 + 675)) && (event.getY() - 47) > 0 && event.getY() < (682 + 44)) {		// if left button is pressed and the clic is in the board limits
@@ -149,13 +195,12 @@ public class Chess extends JPanel implements MouseListener {
 				board[x][y].move(new pos(x, y));
 				clic = !clic;
 				player = !player;
+				if (board[x][y].getName() == "pawn" && ((board[x][y].getPlayer() == false && y == 7) || (board[x][y].getPlayer() == true && y == 0))) 
+					createPiece(pawnChoice(), board[x][y]);
 				}
 			}
-		if (!clic && event.getButton() == MouseEvent.BUTTON3) {
+		if (!clic && event.getButton() == MouseEvent.BUTTON3)
 			clic = !clic;
-			System.out.print("\nOUI");
-			System.out.print(MouseEvent.BUTTON3);
-			}
 		repaint();
 	}
 
