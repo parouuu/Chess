@@ -185,7 +185,7 @@ public class Chess extends JPanel implements MouseListener {
 			if (clic && board[x][y] != null && board[x][y].getPlayer() == player ) {
 				this.oldx = (event.getX() - 48) / (675 / 8);		// get the X on the board 48
 				this.oldy = (event.getY() - 47)/ (682 / 8);			// get the Y on the game board 47
-					pl = ref.checkMove(board[oldx][oldy], board.clone());
+					pl = ref.checkMove(board[oldx][oldy], board.clone(), true);
 					clic = !clic;
 					System.out.print("\nCLIC:(" + oldx + ";" + oldy + ")" + " = " + board[oldx][oldy].name + " | position piece = " + board[oldx][oldy].getPos().getX() + ":" + board[oldx][oldy].getPos().getY());
 				}
